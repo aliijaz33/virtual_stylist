@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 import Splash from './src/screen/Splash';
 import Login from './src/screen/login';
@@ -7,9 +7,29 @@ import Home from './src/screen/Home';
 import SignUp from './src/screen/SignUp';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Alert} from 'react-native';
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState('');
+
+  useEffect(() => {
+    HandleIsLoggedIn();
+  }, []);
+
+  const HandleIsLoggedIn = async () => {
+    try {
+      const data = await AsyncStorage.getItem('login');
+      setIsLoggedIn(data);
+      if (data) {
+        console.log('At Home for Logout', data);
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="splash">

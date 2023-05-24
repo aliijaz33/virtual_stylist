@@ -10,32 +10,31 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUp = ({ navigation }) => {
 
-    const [name, setName] = useState();
+    const [name, setName] = useState('');
     const [mobile, setMobile] = useState();
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [confirm, setConfirm] = useState();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirm, setConfirm] = useState('');
+    const [userData, setUserData] = useState([]);
     const [reg, setReg] = useState(false);
 
 
 
     const Registration = async () => {
         try {
-            // Perform your sign up logic here
+            const newUser = { name, email, mobile, password };
 
-            // Save user data to AsyncStorage
-            if (name && mobile && email && password && confirm) {
-                await AsyncStorage.setItem('name', name);
-                await AsyncStorage.setItem('email', email);
-                await AsyncStorage.setItem('mobile', mobile);
-                await AsyncStorage.setItem('password', password);
-                // Show success message
-                Alert.alert('Sign Up Successful');
-                setReg(true);
-            } else {
-                Alert.alert('Please enter all fields');
-            }
+            // Update user data state
+            setUserData([...userData, newUser]);
 
+            // Save updated user data to AsyncStorage
+            await AsyncStorage.setItem('userData', JSON.stringify([...userData, newUser]));
+
+            // Update logged-in state
+
+            // Show success message
+            Alert.alert('Sign Up Successfull');
+            navigation.navigate('Login');
         } catch (error) {
             Alert.alert('Sign Up Error', error.message);
         }

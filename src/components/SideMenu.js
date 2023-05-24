@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import * as React from 'react';
 import {
-  StyleSheet, Text, Button, View, StatusBar, Image, ImageBackground, TouchableOpacity, SafeAreaView,
+  StyleSheet, Text, Alert, Button, View, StatusBar, Image, ImageBackground, TouchableOpacity, SafeAreaView,
   ScrollView, Easing
 } from 'react-native'
 import {
@@ -11,11 +11,19 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SideMenu = (props) => {
-
+  // console.log('Propsssssss', props.navigation);
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('login');
+      props.navigation.canGoBack();
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
   return (
 
     <SafeAreaView style={{ flex: 1 }}>
@@ -30,7 +38,7 @@ const SideMenu = (props) => {
         <DrawerContentScrollView {...props}>
           <DrawerItemList {...props} />
         </DrawerContentScrollView>
-        <TouchableOpacity style={{ flexDirection: 'row', margin: 20, width: '100%' }}>
+        <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', margin: 20, width: '100%' }}>
           <MaterialCommunityIcons name="logout" size={25} color={'black'} />
           <Text style={{ fontSize: 18, marginLeft: 20, fontWeight: 'bold', color: 'black' }}>Log Out</Text>
         </TouchableOpacity>

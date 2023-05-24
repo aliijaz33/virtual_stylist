@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, StatusBar, Pressable, Image, SafeAreaView, TouchableOpacity, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, Alert, View, StatusBar, Pressable, Image, SafeAreaView, TouchableOpacity, ToastAndroid } from 'react-native'
 import { items } from '../database/database'
 import { FlatList } from 'react-native-gesture-handler'
 import { Button } from '@rneui/base'
@@ -22,6 +22,7 @@ import MyCart from './Mycart'
 
 
 const Drawer = createDrawerNavigator();
+
 
 function Setting({ navigation }) {
   return (
@@ -103,7 +104,14 @@ export default function App() {
 const Home = ({ navigation }) => {
 
   //AsyncStorage.clear();
-
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('login');
+      navigation.navigate('Login');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
 
   const Products = async (item) => {
 
@@ -162,7 +170,6 @@ const Home = ({ navigation }) => {
 
       </View>
       <View style={styles.iconsView}>
-
         <TouchableOpacity onPress={() => navigation.navigate('Wish List')} style={{ flexDirection: 'row' }} >
           <FontAwesome name='heart-o' color='rgba(0,150,90,1)' size={30} />
           <Text style={{

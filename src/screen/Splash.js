@@ -13,7 +13,7 @@ const Splash = ({ navigation }) => {
             <StatusBar barStyle={'light-content'} backgroundColor='#084B3D' />
             <Text style={{ fontSize: 40, color: 'black' }}>Welcome To</Text>
             <Text style={{ fontSize: 40, color: 'black' }} >Virtual Stylist</Text>
-            <Image source={require('../assets/images/splash.png')} style={{ width: 300, height: 300 }} />
+            <Image source={require('../assets/images/splash.jpg')} style={{ width: 300, height: 300 }} />
         </View>
 
     );

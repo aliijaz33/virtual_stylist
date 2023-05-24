@@ -1,16 +1,56 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, Component, useCallback } from 'react'
-import { Text, ActivityIndicator, View, TextInput, StyleSheet, SafeAreaView, StatusBar, Image, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
+import React, { useState, Component, useCallback, useEffect } from 'react'
+import { Text, ActivityIndicator, Alert, View, TextInput, StyleSheet, SafeAreaView, StatusBar, Image, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button, ThemeProvider } from '@rneui/base';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userData, setUserData] = useState([]);
+    const [isLoggedIn, setIsLoggedIn] = useState('');
 
-    const Sign = () => {
-        navigation.navigate('Home');
+    useEffect(() => {
+        getUserData();
+        TokenLogin();
+        console.log(userData);
+    }, []);
+
+    const getUserData = async () => {
+        try {
+            const data = await AsyncStorage.getItem('userData');
+            if (data) {
+                setUserData(JSON.parse(data));
+            }
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        }
+    };
+
+    const SignIn = async () => {
+        try {
+            const user = userData.find(u => u.email === email && u.password === password);
+            if (user) {
+                await AsyncStorage.setItem('login', email);
+                navigation.navigate('Home');
+            } else {
+                Alert.alert('Login Error', 'Invalid username or password');
+            }
+        } catch (error) {
+            Alert.alert('Login Error', error.message);
+        }
+    };
+
+    const TokenLogin = async () => {
+        const value = await AsyncStorage.getItem('login');
+        if (value !== null) {
+            navigation.navigate('Home');
+            console.log("Login Value", value);
+        } else {
+            navigation.navigate('Login');
+        }
     };
 
     return (
@@ -25,15 +65,15 @@ const Login = ({ navigation }) => {
                     <View style={styles.container}>
                         <View style={styles.inputView} >
                             <MaterialCommunityIcons name="email" size={35} color="rgba(0,150,90,1)" />
-                            <TextInput onChangeText={text => setEmail({ text })} style={styles.input} placeholder="Enter Email" placeholderTextColor="#818181" />
+                            <TextInput value={email} onChangeText={text => setEmail(text)} style={styles.input} placeholder="Enter Email" placeholderTextColor="#818181" />
                         </View>
 
                         <View style={styles.inputView} >
                             <MaterialCommunityIcons name="cellphone-key" size={35} color="rgba(0,150,90,1)" />
-                            <TextInput onChangeText={text => setPassword({ text })} style={styles.input} placeholder="Enter Password" placeholderTextColor="#818181" />
+                            <TextInput value={password} onChangeText={text => setPassword(text)} style={styles.input} placeholder="Enter Password" placeholderTextColor="#818181" />
                         </View>
 
-                        <Button onPress={Sign} title="Login"
+                        <Button onPress={SignIn} title="Login"
                             buttonStyle={{
                                 backgroundColor: 'rgba(0,150,90,1)',
                                 borderWidth: 2,
