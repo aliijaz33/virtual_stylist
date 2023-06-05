@@ -76,14 +76,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Get from './src/screen/Get';
-import Post from './src/screen/Post';
-import Put from './src/screen/Put';
-import Delete from './src/screen/Delete';
-// import LoginScreen from './src/screen/LoginScreen';
-// import GradePolicyScreen from './src/screen/GradePolicyScreen';
-// import CalculateCGPAScreen from './src/screen/CalculateCGPAScreen';
-// import ResultScreen from './src/screen/ResultScreen';
+import login from './src/screen/login';
+import CalculateBMI from './src/screen/CalculateBMI';
+import SignUp from './src/screen/SignUp';
+import ResultScreen from './src/screen/ResultScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,11 +87,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {/* <Stack.Screen name="Login" component={LoginScreen} />
-
         <Stack.Screen
-          name="Grading Policy"
-          component={GradePolicyScreen}
+          name="Login"
+          component={login}
           options={{
             headerShown: true,
             headerStyle: {
@@ -105,8 +99,19 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name="Calculate CGPA"
-          component={CalculateCGPAScreen}
+          name="Sign Up"
+          component={SignUp}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: 'rgba(0,150,90,1)',
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="BMI Calculator"
+          component={CalculateBMI}
           options={{
             headerShown: true,
             headerStyle: {
@@ -118,50 +123,6 @@ const App = () => {
         <Stack.Screen
           name="Result"
           component={ResultScreen}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        /> */}
-        <Stack.Screen
-          name="Get Method"
-          component={Get}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Post Method"
-          component={Post}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Put Method"
-          component={Put}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Delete Method"
-          component={Delete}
           options={{
             headerShown: true,
             headerStyle: {

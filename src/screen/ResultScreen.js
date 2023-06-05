@@ -3,27 +3,11 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 const ResultScreen = ({ route }) => {
-    const { cgpa, subjects } = route.params;
-
+    const bmi = route.params;
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <Text style={[styles.resultText, { fontSize: 25, marginTop: '3%' }]}>Calculated Result</Text>
-            <Text style={styles.resultText}>Your CGPA is:  {cgpa}</Text>
-            <Text style={styles.detailsText}>Courses Detail</Text>
-            <View style={styles.listView}>
-                {subjects.map((item, index) => {
-                    return (
-                        <View style={styles.subjectList} key={index}>
-                            <Text style={styles.listNameText}>{item.name.toUpperCase()}</Text>
-                            <View style={{ flexDirection: 'row' }}>
-
-                                <Text style={styles.listText}>Marks: {item.marks}</Text>
-                                <Text style={styles.listText}>Credit Hours: {item.creditHours}</Text>
-                                <Text style={styles.listText}>Course GPA: {item.subjectGpa}</Text>
-                            </View>
-                        </View>)
-                })}
-            </View>
+            <Text style={styles.resultText}>Your BMI is:  {bmi}</Text>
 
         </ScrollView>
     )
