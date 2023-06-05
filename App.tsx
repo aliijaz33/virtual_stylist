@@ -91,77 +91,9 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        {/* <Stack.Screen name="Login" component={LoginScreen} />
-
-        <Stack.Screen
-          name="Grading Policy"
-          component={GradePolicyScreen}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Calculate CGPA"
-          component={CalculateCGPAScreen}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Result"
-          component={ResultScreen}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        /> */}
         <Stack.Screen
           name="Get Method"
           component={Get}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Post Method"
-          component={Post}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Put Method"
-          component={Put}
-          options={{
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: 'rgba(0,150,90,1)',
-            },
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="Delete Method"
-          component={Delete}
           options={{
             headerShown: true,
             headerStyle: {

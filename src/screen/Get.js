@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const Get = ({ navigation }) => {
     const [data, setData] = useState();
@@ -16,6 +17,7 @@ const Get = ({ navigation }) => {
     useEffect(() => {
         getApiData();
     }, []);
+
 
     const buttonPress = () => {
         navigation.navigate('Post Method');
